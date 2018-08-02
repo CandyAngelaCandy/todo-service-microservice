@@ -7,11 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @Getter
@@ -32,4 +36,8 @@ public class User {
     @NotNull
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private List<TodoItem> todos;
 }

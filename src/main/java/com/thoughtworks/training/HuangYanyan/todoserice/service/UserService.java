@@ -13,11 +13,16 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public List<User> list(){
+    public boolean verify(String userName, String password) {
+        boolean present = userRepository.findByName(userName).map(User::getPassword).filter(password::equals).isPresent();
+        return present;
+    }
+
+    public List<User> list() {
         return userRepository.findAll();
     }
 
     public void save(User user) {
-         userRepository.save(user);
+        userRepository.save(user);
     }
 }
