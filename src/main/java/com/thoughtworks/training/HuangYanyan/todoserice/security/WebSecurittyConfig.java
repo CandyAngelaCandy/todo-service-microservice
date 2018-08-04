@@ -24,13 +24,13 @@ public class WebSecurittyConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //super.configure(http);
-        http.csrf().disable().sessionManagement().
-              sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/users","/login")
-                .permitAll().anyRequest().authenticated()
-                .and().addFilterBefore(toDoAuthFilter,UsernamePasswordAuthenticationFilter.class)
-        .exceptionHandling().authenticationEntryPoint(unauthorizeEntryPoint);
+//        http.csrf().disable().sessionManagement().
+//              sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers(HttpMethod.POST,"/users","/login")
+//                .permitAll().anyRequest().authenticated()
+//                .and().addFilterBefore(toDoAuthFilter,UsernamePasswordAuthenticationFilter.class)
+//        .exceptionHandling().authenticationEntryPoint(unauthorizeEntryPoint);
     }
 }

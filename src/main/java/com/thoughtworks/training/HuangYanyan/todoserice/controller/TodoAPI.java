@@ -33,7 +33,7 @@ public class TodoAPI {
         System.out.println(list);
 
         return todoService.list();
-
+        //return todoService.getTodoByUser();
 
         //return list;
     }

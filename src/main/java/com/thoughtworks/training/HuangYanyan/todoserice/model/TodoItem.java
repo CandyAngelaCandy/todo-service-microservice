@@ -1,4 +1,5 @@
 package com.thoughtworks.training.HuangYanyan.todoserice.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -43,5 +44,8 @@ public class TodoItem {
     @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.ALL},mappedBy = "todoItem")
     private List<TaskItem> taskItems = new ArrayList<>();
 
+//    @ManyToOne(cascade = {CascadeType.ALL})
+//    @JoinColumn(name="TODOID")
+//    private TodoItem todoItem;
 
 }

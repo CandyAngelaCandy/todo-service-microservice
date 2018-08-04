@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface TodoRepository extends JpaRepository<TodoItem,Integer> {
 
+    //List<TodoItem> findAllByUserId(int id);
 }
 
 //public class TodoRepository {

@@ -2,15 +2,19 @@ package com.thoughtworks.training.HuangYanyan.todoserice.service;
 
 import com.thoughtworks.training.HuangYanyan.todoserice.model.TaskItem;
 import com.thoughtworks.training.HuangYanyan.todoserice.model.TodoItem;
+import com.thoughtworks.training.HuangYanyan.todoserice.model.User;
 import com.thoughtworks.training.HuangYanyan.todoserice.repository.TodoRepository;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -22,6 +26,9 @@ public class TodoService {
 
     @Autowired
     TodoRepository todoRepository;
+
+    @Autowired
+    private UserService userService;
 
     public String getData() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(data.getInputStream()));
@@ -60,4 +67,47 @@ public class TodoService {
         todoRepository.save(oldTodoItem);
         return oldTodoItem;
     }
+
+    public List<TodoItem> getTodoByUser(String name){
+
+//        String name =  (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User user = userService.getUserByName(name);
+        if(user == null){
+            return new ArrayList<>();
+        }
+        return new ArrayList<>();
+        //return todoRepository.findAllByUserId(user.getId());
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
