@@ -2,17 +2,18 @@ package com.thoughtworks.training.HuangYanyan.todoserice.service;
 
 import com.thoughtworks.training.HuangYanyan.todoserice.model.TaskItem;
 import com.thoughtworks.training.HuangYanyan.todoserice.model.TodoItem;
+import com.thoughtworks.training.HuangYanyan.todoserice.model.User;
 import com.thoughtworks.training.HuangYanyan.todoserice.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Service
 public class TodoService {
@@ -37,7 +38,13 @@ public class TodoService {
     }
 
     public List<TodoItem> list(){
-        return todoRepository.findAll();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        int userId = user.getId();
+
+        List<TodoItem> todoItems = todoRepository.findAllByUserid(userId).get();
+
+        return todoRepository.findAllByUserid(userId).get();
     }
 
     public TodoItem find(int id) {

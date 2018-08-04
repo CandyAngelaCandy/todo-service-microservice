@@ -5,7 +5,10 @@
      `editable` BOOLEAN,
      `visible` BOOLEAN,
      `deleted` BOOLEAN default false,
-    `time` date
+    `time` date,
+    `userid` int
  );
-INSERT INTO todo VALUES (null,"hello 0",false,false ,false ,false ,NOW());
-INSERT INTO todo VALUES (null,"hello 1",false,false ,false ,false ,NOW());
+INSERT INTO todo VALUES (null,"xiao hong todo",false,false ,false ,false ,NOW(),1);
+INSERT INTO todo VALUES (null,"xiao hong todo",false,false ,false ,false ,NOW(),1);
+INSERT INTO todo VALUES (null,"xiao liang todo",false,false ,false ,false ,NOW(),2);
+INSERT INTO todo VALUES (null,"xiao liang todo",false,false ,false ,false ,NOW(),2);

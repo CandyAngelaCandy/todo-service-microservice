@@ -40,6 +40,8 @@ public class TodoItem {
     private boolean editable;
     private boolean visible;
 
+    private int userid;
+
     @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.ALL},mappedBy = "todoItem")
     private List<TaskItem> taskItems = new ArrayList<>();
 
