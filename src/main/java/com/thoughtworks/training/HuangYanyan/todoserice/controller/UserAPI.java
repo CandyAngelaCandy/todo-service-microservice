@@ -19,8 +19,9 @@ public class UserAPI {
 
 
     @PostMapping("/users")
-    public void save(@RequestBody User user) {
+    public ResponseEntity<String> save(@RequestBody User user) {
         userService.save(user);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @GetMapping("/users")

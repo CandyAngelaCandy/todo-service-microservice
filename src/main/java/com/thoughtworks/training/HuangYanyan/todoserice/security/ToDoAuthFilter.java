@@ -30,6 +30,11 @@ public class ToDoAuthFilter extends OncePerRequestFilter {
     UserRepository userRepository;
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        return request.getServletPath().startsWith("/login");
+    }
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
 
         try {
