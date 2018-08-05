@@ -1,4 +1,4 @@
-package com.thoughtworks.training.HuangYanyan.todoserice.security;
+package com.thoughtworks.training.huangyanyan.todoserice.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -24,14 +24,14 @@ public class WebSecurittyConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //super.configure(http);
-        http.csrf().disable().sessionManagement().
-              sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        http.csrf().disable().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/users","/todolist").permitAll()
-                .antMatchers(HttpMethod.POST,"/users","/login")
+                .antMatchers(HttpMethod.GET, "/users", "/todolist").permitAll()
+                .antMatchers(HttpMethod.POST, "/users", "/login")
                 .permitAll().anyRequest().authenticated()
-                .and().addFilterBefore(toDoAuthFilter,UsernamePasswordAuthenticationFilter.class)
-        .exceptionHandling().authenticationEntryPoint(unauthorizeEntryPoint);
+                .and().addFilterBefore(toDoAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling().authenticationEntryPoint(unauthorizeEntryPoint);
     }
 }

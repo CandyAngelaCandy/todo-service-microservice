@@ -1,44 +1,29 @@
-package com.thoughtworks.training.HuangYanyan.todoserice.controller;
+package com.thoughtworks.training.huangyanyan.todoserice.controller;
 
 import com.google.common.collect.ImmutableList;
-import com.thoughtworks.training.HuangYanyan.todoserice.model.TodoItem;
-import com.thoughtworks.training.HuangYanyan.todoserice.model.User;
-import com.thoughtworks.training.HuangYanyan.todoserice.repository.TodoRepository;
-import com.thoughtworks.training.HuangYanyan.todoserice.repository.UserRepository;
-import com.thoughtworks.training.HuangYanyan.todoserice.service.TodoService;
+import com.thoughtworks.training.huangyanyan.todoserice.repository.TodoRepository;
+import com.thoughtworks.training.huangyanyan.todoserice.model.TodoItem;
+import com.thoughtworks.training.huangyanyan.todoserice.model.User;
+import com.thoughtworks.training.huangyanyan.todoserice.repository.UserRepository;
+import com.thoughtworks.training.huangyanyan.todoserice.service.TodoService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpHeaders;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -51,7 +36,7 @@ public class todolistTest {
 
     private final int todoId = 1;
 
-    private final TodoItem todoFixture = new TodoItem(todoId, "foo", new Date(),false,false,false,userId,Collections.emptyList());
+    private final TodoItem todoFixture = new TodoItem(todoId, "foo", new Date(), false, false, false, userId, Collections.emptyList());
 
     @Autowired
     private MockMvc mockMvc;
@@ -71,7 +56,7 @@ public class todolistTest {
     @Before
     public void setUp() throws Exception {
         when(toDoRepository.findAllByUserid(userId)).thenReturn(ImmutableList.of(todoFixture));
-        System.out.println("---------"+toDoRepository.findAllByUserid(userId));
+        System.out.println("---------" + toDoRepository.findAllByUserid(userId));
         when(userRepository.findOne(userId)).thenReturn(userFixture);
         System.out.println(userRepository.findOne(userId));
     }

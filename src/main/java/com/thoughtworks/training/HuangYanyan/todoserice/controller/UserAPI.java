@@ -1,9 +1,8 @@
-package com.thoughtworks.training.HuangYanyan.todoserice.controller;
+package com.thoughtworks.training.huangyanyan.todoserice.controller;
 
-import com.thoughtworks.training.HuangYanyan.todoserice.model.User;
-import com.thoughtworks.training.HuangYanyan.todoserice.service.UserService;
+import com.thoughtworks.training.huangyanyan.todoserice.service.UserService;
+import com.thoughtworks.training.huangyanyan.todoserice.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +19,12 @@ public class UserAPI {
 
 
     @PostMapping("/users")
-    public void save(@RequestBody User user){
-          userService.save(user);
+    public void save(@RequestBody User user) {
+        userService.save(user);
     }
 
     @GetMapping("/users")
-    public List<User> select(){
+    public List<User> select() {
         return userService.list();
     }
 

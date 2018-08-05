@@ -1,18 +1,25 @@
-package com.thoughtworks.training.HuangYanyan.todoserice.controller;
+package com.thoughtworks.training.huangyanyan.todoserice.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thoughtworks.training.HuangYanyan.todoserice.model.TodoItem;
-import com.thoughtworks.training.HuangYanyan.todoserice.service.TodoService;
-import javassist.NotFoundException;
+import com.thoughtworks.training.huangyanyan.todoserice.model.TodoItem;
+import com.thoughtworks.training.huangyanyan.todoserice.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class TodoAPI {
@@ -57,13 +64,13 @@ public class TodoAPI {
     }
 
     @DeleteMapping(path = "/todolist/{id}")
-    public void delete(@PathVariable int id){
+    public void delete(@PathVariable int id) {
         todoService.delete(id);
     }
 
     @PostMapping(path = "/todolist/{id}")
-     public void update(@PathVariable  int id,@RequestBody TodoItem todoItem){
-        todoService.update(id,todoItem);
+    public void update(@PathVariable int id, @RequestBody TodoItem todoItem) {
+        todoService.update(id, todoItem);
     }
 
 }

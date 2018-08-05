@@ -1,8 +1,8 @@
-package com.thoughtworks.training.HuangYanyan.todoserice.security;
+package com.thoughtworks.training.huangyanyan.todoserice.security;
 
-import com.thoughtworks.training.HuangYanyan.todoserice.model.User;
-import com.thoughtworks.training.HuangYanyan.todoserice.repository.UserRepository;
-import com.thoughtworks.training.HuangYanyan.todoserice.service.UserService;
+import com.thoughtworks.training.huangyanyan.todoserice.model.User;
+import com.thoughtworks.training.huangyanyan.todoserice.repository.UserRepository;
+import com.thoughtworks.training.huangyanyan.todoserice.service.UserService;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Optional;
 
 @Component
 public class ToDoAuthFilter extends OncePerRequestFilter {
@@ -40,8 +39,7 @@ public class ToDoAuthFilter extends OncePerRequestFilter {
                 User user = findUserByToken(token);
 
                 SecurityContextHolder.getContext().setAuthentication(
-                            new UsernamePasswordAuthenticationToken(user, null
-                                    , Collections.emptyList()));
+                        new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList()));
 
                 User userhh = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 

@@ -1,4 +1,4 @@
-package com.thoughtworks.training.HuangYanyan.todoserice.security;
+package com.thoughtworks.training.huangyanyan.todoserice.security;
 
 import org.junit.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

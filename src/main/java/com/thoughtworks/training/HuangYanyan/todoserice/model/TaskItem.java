@@ -1,4 +1,4 @@
-package com.thoughtworks.training.HuangYanyan.todoserice.model;
+package com.thoughtworks.training.huangyanyan.todoserice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -24,12 +24,12 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="task")
+@Table(name = "task")
 @Transactional
 public class TaskItem {
     @JsonIgnore
     @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name="TODOID")
+    @JoinColumn(name = "TODOID")
     private TodoItem todoItem;
 
     @Id

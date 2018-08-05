@@ -1,4 +1,4 @@
-package com.thoughtworks.training.HuangYanyan.todoserice.security;
+package com.thoughtworks.training.huangyanyan.todoserice.security;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
@@ -17,6 +17,6 @@ public class UnauthorizeEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException authException) throws IOException {
         int scUnauthorized = HttpServletResponse.SC_UNAUTHORIZED;
 
-        response.sendError(HttpStatus.UNAUTHORIZED.value(),"Access Deny");
+        response.sendError(HttpStatus.UNAUTHORIZED.value(), "Access Deny");
     }
 }

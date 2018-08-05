@@ -1,7 +1,7 @@
-package com.thoughtworks.training.HuangYanyan.todoserice.service;
+package com.thoughtworks.training.huangyanyan.todoserice.service;
 
-import com.thoughtworks.training.HuangYanyan.todoserice.model.User;
-import com.thoughtworks.training.HuangYanyan.todoserice.repository.UserRepository;
+import com.thoughtworks.training.huangyanyan.todoserice.model.User;
+import com.thoughtworks.training.huangyanyan.todoserice.repository.UserRepository;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -36,7 +36,7 @@ public class UserService {
 
     }
 
-    public List<User> list(){
+    public List<User> list() {
         return userRepository.findAll();
     }
 
@@ -54,7 +54,7 @@ public class UserService {
         HashMap<String, Object> claims = new HashMap<>();
 
         System.out.println(user.getId());
-        ;
+
         claims.put("userId", user.getId());
 
         String token = Jwts.builder()

@@ -1,9 +1,8 @@
-package com.thoughtworks.training.HuangYanyan.todoserice.service;
+package com.thoughtworks.training.huangyanyan.todoserice.service;
 
-import com.thoughtworks.training.HuangYanyan.todoserice.model.TaskItem;
-import com.thoughtworks.training.HuangYanyan.todoserice.model.TodoItem;
-import com.thoughtworks.training.HuangYanyan.todoserice.model.User;
-import com.thoughtworks.training.HuangYanyan.todoserice.repository.TodoRepository;
+import com.thoughtworks.training.huangyanyan.todoserice.model.TodoItem;
+import com.thoughtworks.training.huangyanyan.todoserice.model.User;
+import com.thoughtworks.training.huangyanyan.todoserice.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -18,7 +17,7 @@ import java.util.List;
 @Service
 public class TodoService {
 
-    @Value(value="classpath:static/data.json")
+    @Value(value = "classpath:static/data.json")
     private Resource data;
 
     @Autowired
@@ -26,18 +25,18 @@ public class TodoService {
 
     public String getData() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(data.getInputStream()));
-        StringBuffer message=new StringBuffer();
+        StringBuffer message = new StringBuffer();
         String line = null;
-        while((line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {
             message.append(line);
         }
-        String defaultString=message.toString();
-        String result=defaultString.replace("\r\n", "").replaceAll(" +", "");
+        String defaultString = message.toString();
+        String result = defaultString.replace("\r\n", "").replaceAll(" +", "");
         System.out.println(result);
         return result;
     }
 
-    public List<TodoItem> list(){
+    public List<TodoItem> list() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         int userId = user.getId();

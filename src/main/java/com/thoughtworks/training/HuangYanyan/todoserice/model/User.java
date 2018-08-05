@@ -1,4 +1,4 @@
-package com.thoughtworks.training.HuangYanyan.todoserice.model;
+package com.thoughtworks.training.huangyanyan.todoserice.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
 
     @Id

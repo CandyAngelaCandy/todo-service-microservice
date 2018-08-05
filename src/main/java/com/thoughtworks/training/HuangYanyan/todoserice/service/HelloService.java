@@ -1,8 +1,7 @@
-package com.thoughtworks.training.HuangYanyan.todoserice.service;
+package com.thoughtworks.training.huangyanyan.todoserice.service;
 
-import com.thoughtworks.training.HuangYanyan.todoserice.model.Person;
-import com.thoughtworks.training.HuangYanyan.todoserice.repository.PersonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.thoughtworks.training.huangyanyan.todoserice.repository.PersonRepository;
+import com.thoughtworks.training.huangyanyan.todoserice.model.Person;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
