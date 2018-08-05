@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Collections;
 
 @Component
@@ -67,7 +68,7 @@ public class ToDoAuthFilter extends OncePerRequestFilter {
     public User findUserByToken(String token) {
 
         Integer userId = Jwts.parser()
-                .setSigningKey("kitty".getBytes())
+                .setSigningKey("kitty".getBytes(Charset.forName("UTF-8")))
                 .parseClaimsJws(token)
                 .getBody()
                 .get("userId", Integer.class);

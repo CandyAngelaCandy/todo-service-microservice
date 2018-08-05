@@ -24,12 +24,13 @@ public class TodoService {
     TodoRepository todoRepository;
 
     public String getData() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(data.getInputStream()));
+        BufferedReader br = new BufferedReader(new InputStreamReader(data.getInputStream(),"UTF-8"));
         StringBuffer message = new StringBuffer();
         String line = null;
         while ((line = br.readLine()) != null) {
             message.append(line);
         }
+        br.close();
         String defaultString = message.toString();
         String result = defaultString.replace("\r\n", "").replaceAll(" +", "");
         System.out.println(result);

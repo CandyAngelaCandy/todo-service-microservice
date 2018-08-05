@@ -28,15 +28,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-public class todolistTest {
+public class TodolistTest {
 
-    private final int userId = 1;
+    private static final int userId = 1;
 
     private final User userFixture = new User(userId, "huangyanyan", "password");
 
-    private final int todoId = 1;
+    private static final int todoId = 1;
 
-    private final TodoItem todoFixture = new TodoItem(todoId, "foo", new Date(), false, false, false, userId, Collections.emptyList());
+    private final TodoItem todoFixture = new TodoItem(todoId, "foo", new Date(), false,  false, userId, Collections.emptyList());
 
     @Autowired
     private MockMvc mockMvc;

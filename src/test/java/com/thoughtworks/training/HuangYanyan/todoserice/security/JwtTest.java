@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.Test;
 
+import java.nio.charset.Charset;
 import java.sql.Date;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -16,26 +17,26 @@ import static org.junit.Assert.assertThat;
 
 public class JwtTest {
     @Test
-    public void generateJwt(){
-        HashMap<String,Object> claims = new HashMap<>();
+    public void generateJwt() {
+        HashMap<String, Object> claims = new HashMap<>();
 
-        claims.put("name","xiaohong");
-        claims.put("role","dev");
+        claims.put("name", "xiaohong");
+        claims.put("role", "dev");
 
         //Generate
-        String token = Jwts.builder().addClaims(claims).
-                setExpiration(Date.from(Instant.now().plus(100,ChronoUnit.DAYS))).signWith(SignatureAlgorithm.HS512,"kitty".getBytes()).compact();
+        String token = Jwts.builder().addClaims(claims)
+                .setExpiration(Date.from(Instant.now().plus(100, ChronoUnit.DAYS))).signWith(SignatureAlgorithm.HS512, "kitty".getBytes(Charset.forName("UTF-8"))).compact();
 
 
         //Parse & Verification
-        byte[] secretKey = "kitty".getBytes();
+        byte[] secretKey = "kitty".getBytes(Charset.forName("UTF-8"));
 
-        Claims body =Jwts.parser().setSigningKey(secretKey)
+        Claims body = Jwts.parser().setSigningKey(secretKey)
                 .parseClaimsJws(token)
                 .getBody();
 
-        assertThat(body.get("name"),is("xiaohong"));
-        assertThat(body.get("role"),is("dev"));
+        assertThat(body.get("name"), is("xiaohong"));
+        assertThat(body.get("role"), is("dev"));
 
     }
 }

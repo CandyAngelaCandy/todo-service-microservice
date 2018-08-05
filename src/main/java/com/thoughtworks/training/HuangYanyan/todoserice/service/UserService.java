@@ -8,6 +8,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class UserService {
 
         String token = Jwts.builder()
                 .addClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, secretKey.getBytes())
+                .signWith(SignatureAlgorithm.HS512, secretKey.getBytes(Charset.forName("UTF-8")))
                 .compact();
 
         return token;

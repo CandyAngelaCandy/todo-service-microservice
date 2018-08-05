@@ -50,7 +50,7 @@ public class TodoItem {
 
 
     private boolean editable;
-    private boolean visible;
+    //private boolean visible;
 
     private int userid;
 
