@@ -4,6 +4,8 @@ import com.thoughtworks.training.HuangYanyan.todoserice.model.User;
 import com.thoughtworks.training.HuangYanyan.todoserice.repository.UserRepository;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -18,10 +20,19 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
     public boolean verify(String userName, String password) {
 
-        boolean present = userRepository.findByName(userName).map(User::getPassword).filter(password::equals).isPresent();
-        return present;
+//        boolean present = userRepository.findByName(userName).map(User::getPassword).filter(password::equals).isPresent();
+
+        User user = userRepository.findByName(userName).get();
+
+        if (!encoder.matches(password, user.getPassword())) {
+            throw new BadCredentialsException(String.format("wrong password"));
+        }
+
+        return true;
 
     }
 
@@ -30,7 +41,9 @@ public class UserService {
     }
 
     public void save(User user) {
-         userRepository.save(user);
+        String password = user.getPassword();
+        user.setPassword(encoder.encode(password));
+        userRepository.save(user);
     }
 
     public String generateToken(String userName) {

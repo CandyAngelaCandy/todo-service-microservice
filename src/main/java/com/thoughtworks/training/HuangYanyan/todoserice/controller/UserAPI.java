@@ -21,7 +21,6 @@ public class UserAPI {
 
     @PostMapping("/users")
     public void save(@RequestBody User user){
-        System.out.println(user+"user ");
           userService.save(user);
     }
 

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface TodoRepository extends JpaRepository<TodoItem,Integer> {
-    Optional<List<TodoItem>> findAllByUserid(int userId);
+    List<TodoItem> findAllByUserid(int userId);
 }
 
 //public class TodoRepository {

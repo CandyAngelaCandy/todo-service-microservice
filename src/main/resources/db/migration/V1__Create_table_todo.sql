@@ -8,7 +8,7 @@
     `time` date,
     `userid` int
  );
-INSERT INTO todo VALUES (null,"xiao hong todo",false,false ,false ,false ,NOW(),1);
-INSERT INTO todo VALUES (null,"xiao hong todo",false,false ,false ,false ,NOW(),1);
-INSERT INTO todo VALUES (null,"xiao liang todo",false,false ,false ,false ,NOW(),2);
-INSERT INTO todo VALUES (null,"xiao liang todo",false,false ,false ,false ,NOW(),2);
+INSERT INTO todo VALUES (null,'xiao hong todo',false,false ,false ,false ,NOW(),1);
+INSERT INTO todo VALUES (null,'xiao hong todo',false,false ,false ,false ,NOW(),1);
+INSERT INTO todo VALUES (null,'xiao liang todo',false,false ,false ,false ,NOW(),2);
+INSERT INTO todo VALUES (null,'xiao liang todo',false,false ,false ,false ,NOW(),2);

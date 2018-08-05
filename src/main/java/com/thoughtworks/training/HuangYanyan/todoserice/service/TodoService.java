@@ -42,9 +42,9 @@ public class TodoService {
 
         int userId = user.getId();
 
-        List<TodoItem> todoItems = todoRepository.findAllByUserid(userId).get();
+        List<TodoItem> todoItems = todoRepository.findAllByUserid(userId);
 
-        return todoRepository.findAllByUserid(userId).get();
+        return todoItems;
     }
 
     public TodoItem find(int id) {
