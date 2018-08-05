@@ -40,4 +40,7 @@ public class User {
 //    @OneToMany(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "user_id")
 //    private List<TodoItem> todos;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private List<TodoItem> todos;
 }

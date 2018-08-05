@@ -27,6 +27,9 @@ public class UserService {
         Optional<User> user = userRepository.findByName(userName);
         return user.isPresent() && new BCryptPasswordEncoder().matches(password, user.get().getPassword());
 
+    public boolean verify(String userName, String password) {
+        boolean present = userRepository.findByName(userName).map(User::getPassword).filter(password::equals).isPresent();
+        return present;
     }
 
     public List<User> list() {
