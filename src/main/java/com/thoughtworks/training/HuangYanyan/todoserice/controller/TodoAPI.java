@@ -6,6 +6,7 @@ import com.thoughtworks.training.HuangYanyan.todoserice.model.TodoItem;
 import com.thoughtworks.training.HuangYanyan.todoserice.service.TodoService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class TodoAPI {
     private TodoService todoService = new TodoService();
 
     @RequestMapping(method = RequestMethod.GET, path = "/todolist")
-    public List<TodoItem> todo(Model model) throws IOException {
+    public ResponseEntity<List<TodoItem>> todo(Model model) throws IOException {
 
         String json = todoService.getData();
         System.out.println("json数据" + json);
@@ -32,7 +33,10 @@ public class TodoAPI {
 
         System.out.println(list);
 
-        return todoService.list();
+        List<TodoItem> todoItemList = todoService.list();
+
+        return ResponseEntity.ok(todoItemList);
+        //return todoService.list();
 
 
         //return list;
