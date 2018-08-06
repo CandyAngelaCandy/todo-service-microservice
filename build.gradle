@@ -40,23 +40,8 @@ dependencies {
 	runtime('com.h2database:h2')
 	compile 'com.google.guava:guava:25.1-jre'
 	testCompile('org.springframework.security:spring-security-test')
+	compile('org.springframework.cloud:spring-cloud-starter-openfeign')
 }
-
-//tasks.withType(Checkstyle) {
-//	reports {
-//		xml.enabled false
-//		html.enabled true
-//		html.stylesheet resources.text.fromFile('config/checkstyle/checkstyle.xml')
-//	}
-//}
-//
-//tasks.withType(FindBugs) {
-//	reports {
-//		xml.enabled false
-//		html.enabled true
-//		html.stylesheet resources.text.fromFile('config/findbugs/excludeBugsFilter.xml')
-//	}
-//}
 
 tasks.withType(Checkstyle) {
 	reports {
@@ -69,5 +54,15 @@ tasks.withType(FindBugs) {
 	reports {
 		xml.enabled false
 		html.enabled true
+	}
+}
+
+ext {
+	springCloudVersion = 'Edgware.SR4'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }

@@ -11,12 +11,3 @@ public interface TodoRepository extends JpaRepository<TodoItem, Integer> {
     List<TodoItem> findAllByUserid(int userId);
 }
 
-//public class TodoRepository {
-//    public List<TodoItem> list(){
-//        List<TodoItem> list = new ArrayList<TodoItem>(){{
-//            add(new TodoItem(1,"learn react"));
-//            add(new TodoItem(2,"learn spring"));
-//        }};
-//        return list;
-//    }
-//}

@@ -1,4 +1,4 @@
-package com.thoughtworks.training.huangyanyan.todoserice.model;
+package com.thoughtworks.training.huangyanyan.todoserice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Person {
+public class User {
+
+    private int id;
+
     private String name;
-    private String from;
 }

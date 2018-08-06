@@ -26,30 +26,15 @@ public class TodoAPI {
     @Autowired
     private TodoService todoService = new TodoService();
 
-    @RequestMapping(method = RequestMethod.GET, path = "/todolist")
+    @RequestMapping(method = RequestMethod.GET, path = "/todolists")
     public ResponseEntity<List<TodoItem>> todo(Model model) throws IOException {
-
-        String json = todoService.getData();
-        System.out.println("json数据" + json);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<TodoItem> list = objectMapper.readValue(json,
-                new TypeReference<List<TodoItem>>() {
-                }
-        );
-
-        System.out.println(list);
 
         List<TodoItem> todoItemList = todoService.list();
 
         return ResponseEntity.ok(todoItemList);
-        //return todoService.list();
-
-
-        //return list;
     }
 
-    @GetMapping(path = "/todolist/{id}")
+    @GetMapping(path = "/todolists/{id}")
     public TodoItem find(@PathVariable int id) {
 //        return Optional.ofNullable(todoService.find(id)).orElseThrow(()->{
 //           return new NotFoundException();
@@ -58,17 +43,17 @@ public class TodoAPI {
         return todoService.find(id);
     }
 
-    @PostMapping(path = "/todolist")
+    @PostMapping(path = "/todolists")
     public void add(@RequestBody TodoItem todoItem) {
         todoService.save(todoItem);
     }
 
-    @DeleteMapping(path = "/todolist/{id}")
+    @DeleteMapping(path = "/todolists/{id}")
     public void delete(@PathVariable int id) {
         todoService.delete(id);
     }
 
-    @PostMapping(path = "/todolist/{id}")
+    @PostMapping(path = "/todolists/{id}")
     public void update(@PathVariable int id, @RequestBody TodoItem todoItem) {
         todoService.update(id, todoItem);
     }

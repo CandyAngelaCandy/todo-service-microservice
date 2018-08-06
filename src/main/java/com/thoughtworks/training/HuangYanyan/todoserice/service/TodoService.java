@@ -1,7 +1,7 @@
 package com.thoughtworks.training.huangyanyan.todoserice.service;
 
+import com.thoughtworks.training.huangyanyan.todoserice.dto.User;
 import com.thoughtworks.training.huangyanyan.todoserice.model.TodoItem;
-import com.thoughtworks.training.huangyanyan.todoserice.model.User;
 import com.thoughtworks.training.huangyanyan.todoserice.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,11 +38,9 @@ public class TodoService {
     }
 
     public List<TodoItem> list() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user= (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        int userId = user.getId();
-
-        List<TodoItem> todoItems = todoRepository.findAllByUserid(userId);
+        List<TodoItem> todoItems = todoRepository.findAllByUserid(user.getId());
 
         return todoItems;
     }

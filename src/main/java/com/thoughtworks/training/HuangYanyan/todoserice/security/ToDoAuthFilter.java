@@ -1,15 +1,16 @@
 package com.thoughtworks.training.huangyanyan.todoserice.security;
 
-import com.thoughtworks.training.huangyanyan.todoserice.model.User;
-import com.thoughtworks.training.huangyanyan.todoserice.repository.UserRepository;
-import com.thoughtworks.training.huangyanyan.todoserice.service.UserService;
+import com.thoughtworks.training.huangyanyan.todoserice.client.UserClient;
+import com.thoughtworks.training.huangyanyan.todoserice.dto.User;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -24,15 +25,7 @@ import java.util.Collections;
 public class ToDoAuthFilter extends OncePerRequestFilter {
 
     @Autowired
-    UserService userService;
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return request.getServletPath().startsWith("/login");
-    }
+    private UserClient userClient;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
@@ -42,14 +35,16 @@ public class ToDoAuthFilter extends OncePerRequestFilter {
             String token = request.getHeader(HttpHeaders.AUTHORIZATION);
 
             if (!StringUtils.isEmpty(token)) {
-                User user = findUserByToken(token);
+
+//                RestTemplate restTemplate = new RestTemplate();
+//                ResponseEntity<User> responseEntity = restTemplate.postForEntity("http://localhost:8080/api/verification",token,User.class);
+//                User user = responseEntity.getBody();
+
+                User user = userClient.verifyToken(token);
 
                 SecurityContextHolder.getContext().setAuthentication(
                         new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList()));
 
-                User userhh = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-                System.out.println(userhh.getId());
             }
 
         } catch (RuntimeException e) {
@@ -62,22 +57,15 @@ public class ToDoAuthFilter extends OncePerRequestFilter {
 
     }
 
-    private boolean validateToken(String token) {
-        String[] userPass = token.split(":");
-        String userName = userPass[0];
-        String password = userPass[1];
-        return userService.verify(userName, password);
-    }
+//    public int findUserByToken(String token) {
+//
+//        int userId = Jwts.parser()
+//                .setSigningKey("kitty".getBytes(Charset.forName("UTF-8")))
+//                .parseClaimsJws(token)
+//                .getBody()
+//                .get("userId", Integer.class);
+//
+//        return userId;
+//    }
 
-
-    public User findUserByToken(String token) {
-
-        Integer userId = Jwts.parser()
-                .setSigningKey("kitty".getBytes(Charset.forName("UTF-8")))
-                .parseClaimsJws(token)
-                .getBody()
-                .get("userId", Integer.class);
-
-        return userRepository.findOne(userId);
-    }
 }

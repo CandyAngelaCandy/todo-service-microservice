@@ -2,7 +2,7 @@
     id int PRIMARY KEY AUTO_INCREMENT,
     text varchar(100),
     todoId int,
-     CONSTRAINT FK_todoId FOREIGN KEY (todoId)
+    CONSTRAINT FK_todoId FOREIGN KEY (todoId)
     REFERENCES todo(id)
  );
 INSERT INTO task VALUES (null,'todo1 task1',1);

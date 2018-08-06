@@ -18,5 +18,6 @@ public class UnauthorizeEntryPoint implements AuthenticationEntryPoint {
         int scUnauthorized = HttpServletResponse.SC_UNAUTHORIZED;
 
         response.sendError(HttpStatus.UNAUTHORIZED.value(), "Access Deny");
+//        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 }
