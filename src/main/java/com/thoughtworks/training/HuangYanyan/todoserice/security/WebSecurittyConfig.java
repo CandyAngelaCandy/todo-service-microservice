@@ -30,9 +30,7 @@ public class WebSecurittyConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/login","/todolists").permitAll()
-                .antMatchers(HttpMethod.GET, "/users", "/todolists").permitAll()
-                .antMatchers(HttpMethod.POST, "/users").permitAll()
+                .antMatchers(HttpMethod.POST,"/login","/todos").permitAll()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(toDoAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().authenticationEntryPoint(unauthorizeEntryPoint);

@@ -26,7 +26,7 @@ public class TodoAPI {
     @Autowired
     private TodoService todoService = new TodoService();
 
-    @RequestMapping(method = RequestMethod.GET, path = "/todolists")
+    @RequestMapping(method = RequestMethod.GET, path = "/todos")
     public ResponseEntity<List<TodoItem>> todo(Model model) throws IOException {
 
         List<TodoItem> todoItemList = todoService.list();
@@ -34,7 +34,7 @@ public class TodoAPI {
         return ResponseEntity.ok(todoItemList);
     }
 
-    @GetMapping(path = "/todolists/{id}")
+    @GetMapping(path = "/todos/{id}")
     public TodoItem find(@PathVariable int id) {
 //        return Optional.ofNullable(todoService.find(id)).orElseThrow(()->{
 //           return new NotFoundException();
@@ -43,17 +43,17 @@ public class TodoAPI {
         return todoService.find(id);
     }
 
-    @PostMapping(path = "/todolists")
+    @PostMapping(path = "/todos")
     public void add(@RequestBody TodoItem todoItem) {
         todoService.save(todoItem);
     }
 
-    @DeleteMapping(path = "/todolists/{id}")
+    @DeleteMapping(path = "/todos/{id}")
     public void delete(@PathVariable int id) {
         todoService.delete(id);
     }
 
-    @PostMapping(path = "/todolists/{id}")
+    @PostMapping(path = "/todos/{id}")
     public void update(@PathVariable int id, @RequestBody TodoItem todoItem) {
         todoService.update(id, todoItem);
     }

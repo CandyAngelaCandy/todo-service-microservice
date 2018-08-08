@@ -24,23 +24,20 @@ import java.util.Collections;
 @Component
 public class ToDoAuthFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private UserClient userClient;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+        String internalToken = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         try {
 
-            String token = request.getHeader(HttpHeaders.AUTHORIZATION);
+            //String internalToken = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-            if (!StringUtils.isEmpty(token)) {
+            if (!StringUtils.isEmpty(internalToken)) {
 
-//                RestTemplate restTemplate = new RestTemplate();
-//                ResponseEntity<User> responseEntity = restTemplate.postForEntity("http://localhost:8080/api/verification",token,User.class);
-//                User user = responseEntity.getBody();
+                int userID = Integer.parseInt(internalToken.split(":")[0]);
+                String userName = internalToken.split(":")[1];
 
-                User user = userClient.verifyToken(token);
+                User user = new User(userID,userName);
 
                 SecurityContextHolder.getContext().setAuthentication(
                         new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList()));
@@ -56,16 +53,5 @@ public class ToDoAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
 
     }
-
-//    public int findUserByToken(String token) {
-//
-//        int userId = Jwts.parser()
-//                .setSigningKey("kitty".getBytes(Charset.forName("UTF-8")))
-//                .parseClaimsJws(token)
-//                .getBody()
-//                .get("userId", Integer.class);
-//
-//        return userId;
-//    }
 
 }
