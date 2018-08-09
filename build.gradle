@@ -41,6 +41,8 @@ dependencies {
 	compile 'com.google.guava:guava:25.1-jre'
 	testCompile('org.springframework.security:spring-security-test')
 	compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+	//compile('org.springframework.cloud:spring-cloud-starter-consul-discovery')
+	//compile('org.springframework.boot:spring-boot-starter-actuator')
 }
 
 tasks.withType(Checkstyle) {
