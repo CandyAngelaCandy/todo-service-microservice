@@ -1,11 +1,13 @@
 package com.thoughtworks.training.huangyanyan.todoserice.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thoughtworks.training.huangyanyan.todoserice.dto.User;
 import com.thoughtworks.training.huangyanyan.todoserice.model.TodoItem;
+import com.thoughtworks.training.huangyanyan.todoserice.service.SpellChecker;
+import com.thoughtworks.training.huangyanyan.todoserice.service.SpellCheckService;
 import com.thoughtworks.training.huangyanyan.todoserice.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
-
 import java.io.IOException;
 import java.util.List;
 
@@ -26,12 +27,23 @@ public class TodoAPI {
     @Autowired
     private TodoService todoService = new TodoService();
 
+    @Autowired
+    SpellChecker spellChecker;
+
+    @Autowired
+    SpellCheckService spellCheckService;
+
     @RequestMapping(method = RequestMethod.GET, path = "/todos")
     public ResponseEntity<List<TodoItem>> todo(Model model) throws IOException {
 
         List<TodoItem> todoItemList = todoService.list();
 
-        return ResponseEntity.ok(todoItemList);
+        //spellChecker.check(todoItemList, TodoItem::getText, TodoItem::setSuggestion);
+
+         //spellRetry.retryService(todoItemList);
+
+        return ResponseEntity.ok(spellCheckService.checkSpell(todoItemList));
+
     }
 
     @GetMapping(path = "/todos/{id}")
@@ -45,6 +57,12 @@ public class TodoAPI {
 
     @PostMapping(path = "/todos")
     public void add(@RequestBody TodoItem todoItem) {
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        todoItem.setUserid(user.getId());
+
+        //return userRepository.findOne(user.getId()).get();
         todoService.save(todoItem);
     }
 

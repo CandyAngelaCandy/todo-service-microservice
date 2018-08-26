@@ -57,5 +57,6 @@ public class TodoItem {
     @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.ALL}, mappedBy = "todoItem")
     private List<TaskItem> taskItems = new ArrayList<>();
 
+    private String suggestion;
 
 }
