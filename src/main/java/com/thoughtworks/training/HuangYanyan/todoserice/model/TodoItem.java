@@ -48,9 +48,7 @@ public class TodoItem {
     @Transient
     private boolean completed;
 
-
     private boolean editable;
-    //private boolean visible;
 
     private int userid;
 

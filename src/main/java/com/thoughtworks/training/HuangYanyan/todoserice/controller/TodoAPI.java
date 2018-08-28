@@ -1,6 +1,7 @@
 package com.thoughtworks.training.huangyanyan.todoserice.controller;
 
 import com.thoughtworks.training.huangyanyan.todoserice.dto.User;
+import com.thoughtworks.training.huangyanyan.todoserice.model.TaskItem;
 import com.thoughtworks.training.huangyanyan.todoserice.model.TodoItem;
 import com.thoughtworks.training.huangyanyan.todoserice.service.SpellChecker;
 import com.thoughtworks.training.huangyanyan.todoserice.service.SpellCheckService;
@@ -40,7 +41,7 @@ public class TodoAPI {
 
         //spellChecker.check(todoItemList, TodoItem::getText, TodoItem::setSuggestion);
 
-         //spellRetry.retryService(todoItemList);
+        //spellRetry.retryService(todoItemList);
 
         return ResponseEntity.ok(spellCheckService.checkSpell(todoItemList));
 
@@ -49,9 +50,9 @@ public class TodoAPI {
     @GetMapping(path = "/todos/{id}")
     public TodoItem find(@PathVariable int id) {
 //        return Optional.ofNullable(todoService.find(id)).orElseThrow(()->{
-//           return new NotFoundException();
+//           return new N`otFoundException();
 //        });
-
+        System.out.println("haha");
         return todoService.find(id);
     }
 
@@ -71,9 +72,15 @@ public class TodoAPI {
         todoService.delete(id);
     }
 
+//    @PostMapping(path = "/todos/{id}")
+//    public void update(@PathVariable int id, @RequestBody TodoItem todoItem) {
+//        todoService.update(id, todoItem);
+//    }
+
     @PostMapping(path = "/todos/{id}")
-    public void update(@PathVariable int id, @RequestBody TodoItem todoItem) {
-        todoService.update(id, todoItem);
+    public void addTask(@PathVariable int id, @RequestBody TaskItem taskItem) {
+        System.out.println("haha");
+        todoService.update(id, taskItem);
     }
 
 }

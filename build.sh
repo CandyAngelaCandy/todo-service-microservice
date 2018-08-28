@@ -2,7 +2,7 @@
 
 ./gradlew clean bootRepackage
 
-docker build --rm . --tag huangyanyan/todo-service:${VER:?invalid version}
+//docker build --rm . --tag huangyanyan/todo-service:${VER:?invalid version}
 docker push huangyanyan/todo-service:${VER:?invalid version}
 
 export VER

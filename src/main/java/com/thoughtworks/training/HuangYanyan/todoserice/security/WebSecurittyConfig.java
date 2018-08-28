@@ -30,7 +30,7 @@ public class WebSecurittyConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/login","/todos").permitAll()
+                .antMatchers(HttpMethod.POST,"/login","/todos/**").permitAll()
                 .antMatchers("/hystrix*/**","/webjars/**","/*.stream/**").permitAll()
                 .antMatchers("/health").permitAll()
                 .anyRequest().authenticated()

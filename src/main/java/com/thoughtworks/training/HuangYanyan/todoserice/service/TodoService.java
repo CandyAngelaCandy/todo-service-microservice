@@ -1,6 +1,7 @@
 package com.thoughtworks.training.huangyanyan.todoserice.service;
 
 import com.thoughtworks.training.huangyanyan.todoserice.dto.User;
+import com.thoughtworks.training.huangyanyan.todoserice.model.TaskItem;
 import com.thoughtworks.training.huangyanyan.todoserice.model.TodoItem;
 import com.thoughtworks.training.huangyanyan.todoserice.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,20 +24,6 @@ public class TodoService {
     @Autowired
     TodoRepository todoRepository;
 
-    public String getData() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(data.getInputStream(),"UTF-8"));
-        StringBuffer message = new StringBuffer();
-        String line = null;
-        while ((line = br.readLine()) != null) {
-            message.append(line);
-        }
-        br.close();
-        String defaultString = message.toString();
-        String result = defaultString.replace("\r\n", "").replaceAll(" +", "");
-        System.out.println(result);
-        return result;
-    }
-
     public List<TodoItem> list() {
         User user= (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -46,7 +33,11 @@ public class TodoService {
     }
 
     public TodoItem find(int id) {
-        return todoRepository.findOne(id);
+        User user= (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        List<TodoItem> todoItems = todoRepository.findAllByUserid(user.getId());
+
+        return todoItems.stream().filter((todoItem) -> todoItem.getId() == id).findFirst().orElse(null);
     }
 
     public void save(TodoItem todoItem) {
@@ -57,12 +48,22 @@ public class TodoService {
         todoRepository.delete(id);
     }
 
-    public TodoItem update(int id, TodoItem newTodoItem) {
-        TodoItem oldTodoItem = todoRepository.findOne(id);
-        oldTodoItem.setId(newTodoItem.getId());
-        oldTodoItem.setText(newTodoItem.getText());
+    public TodoItem update(int id, TaskItem newTaskItem) {
+        User user= (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<TodoItem> todoItems = todoRepository.findAllByUserid(user.getId());
 
-        todoRepository.save(oldTodoItem);
-        return oldTodoItem;
+        TodoItem todoItemById = todoItems.stream().filter((todoItem) -> todoItem.getId() == id).findFirst().orElse(null);
+
+        List<TaskItem> taskItems = todoItemById.getTaskItems();
+
+        newTaskItem.setTodoItem(todoItemById);
+
+        taskItems.add(newTaskItem);
+
+
+        todoItemById.setTaskItems(taskItems);
+
+        todoRepository.save(todoItemById);
+        return todoItemById;
     }
 }
